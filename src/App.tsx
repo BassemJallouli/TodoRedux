@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import * as React from 'react';
+import { Fragment } from 'react';
+import { connect } from 'react-redux'
+import { Grid } from 'semantic-ui-react';
+import {  ADD_TASK, REMOVE_TASK } from './actions/index'
+import { RootState } from './store';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export interface IAppProps {
 }
 
-export default App;
+export class App extends React.Component<IAppProps> {
+  public render() {
+    return (
+      <Fragment>
+        <Grid centered>
+          <Grid.Row>
+            <h2>To Do Reminder</h2>
+          </Grid.Row>
+          <Grid.Row>
+            <input  type="text"
+                    placeholder="Add task" />
+          </Grid.Row>
+          <Grid.Row>
+            <input  type="datetime-local"/>
+          </Grid.Row>
+          <Grid.Row><button>Add task</button>
+          </Grid.Row>
+          <Grid.Row><button>Clear task</button>
+          </Grid.Row>
+        </Grid>
+        
+      </Fragment>
+    );
+  }
+}
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    text : state.text
+  }
+} 
+
+export default connect (
+  mapStateToProps,
+  {ADD_TASK, REMOVE_TASK}
+)(App);

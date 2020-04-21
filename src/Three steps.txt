@@ -1,0 +1,4 @@
+1- Action Types
+2- Action creators
+3- Reducers
+4- tsx
